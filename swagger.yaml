@@ -1,0 +1,507 @@
+openapi: 3.0.3
+info:
+  title: Challenge Chapter 5
+  description: |-
+    Documents API Challenge 5
+  contact:
+    email: mafif357@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+tags:
+  - name: User
+    description: Operations related to users
+  - name: Bank Accounts
+    description: Operations related to bank accounts
+  - name: Transactions
+    description: Operations related to transactions
+paths:
+  /users:
+    post:
+      tags:
+        - User
+      operationId: post-create-new-user
+      summary: Create a new user
+      description: Creates a new user with the provided information.
+      requestBody:
+        $ref: "#/components/requestBodies/CreateUser"
+      responses:
+        "201":
+          description: Successful user creation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/UserModel"
+    get:
+      tags:
+        - User
+      operationId: get-fetch-all-user
+      summary: Get all users
+      description: Retrieves a list of all registered users.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          users:
+                            type: array
+                            items:
+                              $ref: "#/components/schemas/UserModel"
+  "/users/{userId}":
+    get:
+      tags:
+        - User
+      operationId: get-fetch-user-detail
+      summary: Get user details
+      description: Retrieves details of a specific user.
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the user to retrieve.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/UserModel"
+    put:
+      tags:
+        - User
+      operationId: put-update-user
+      summary: Update user details
+      description: Updates details of a specific user.
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the user to update.
+      responses:
+        "200":
+          description: Successful user update
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/UserModel"
+    delete:
+      tags:
+        - User
+      operationId: delete-remove-user
+      summary: Delete user
+      description: Deletes a specific user.
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the user to delete.
+      responses:
+        "200":
+          description: Successful user deletion
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        example: null
+  /bank accounts:
+    post:
+      tags:
+        - Bank Accounts
+      operationId: post-create-post
+      summary: Create a new Bank Accounts
+      description: Creates a new bank accounts with the provided information.
+      requestBody:
+        $ref: "#/components/requestBodies/CreateBankaccounts"
+      responses:
+        "201":
+          description: Successful post creation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/BankAccountsModel"
+    get:
+      tags:
+        - Bank Accounts
+      operationId: get-fetch-all-post
+      summary: Get all Bank Accounts
+      description: Retrieves a list of all bank accounts.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        $ref: "#/components/schemas/BankAccountsModel"
+  "/bank accounts/{bankId}":
+    get:
+      tags:
+        - Bank Accounts
+      operationId: get-fetch-bank-accounts-detail
+      summary: Get bank accounts details
+      description: Retrieves details of a specific bank account.
+      parameters:
+        - in: path
+          name: bankId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the post to retrieve.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/BankAccountsModel"
+    put:
+      tags:
+        - Bank Accounts
+      operationId: put-update-bank-accounts
+      summary: Update bank accounts details
+      description: Updates details of a bank accounts.
+      parameters:
+        - in: path
+          name: bankId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the bank accounts to update.
+      responses:
+        "200":
+          description: Successful user update
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/BankAccountsModel"
+    delete:
+      tags:
+        - Bank Accounts
+      operationId: delete-remove-bank-accounts
+      summary: Delete user
+      description: Deletes a specific bank accounts.
+      parameters:
+        - in: path
+          name: bankId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the bank accounts to delete.
+      responses:
+        "200":
+          description: Successful bank accounts deletion
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        example: null
+  /transactions:
+    post:
+      tags:
+        - Transactions
+      operationId: post-transactions-post
+      summary: Create a new Transactions
+      description: Creates a new transactions with the provided information.
+      requestBody:
+        $ref: "#/components/requestBodies/CreateTranscations"
+      responses:
+        "201":
+          description: Successful post creation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/TransactionsModel"
+    get:
+      tags:
+        - Transactions
+      operationId: get-fetch-all-transactions
+      summary: Get all Transactions
+      description: Retrieves a list of all transactions.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        $ref: "#/components/schemas/TransactionsModel"
+  "/transactions/{transactionId}":
+    get:
+      tags:
+        - Transactions
+      operationId: get-fetch-transactions-detail
+      summary: Get transactions details
+      description: Retrieves details of a specific transactions.
+      parameters:
+        - in: path
+          name: bankId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the transactions to retrieve.
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/TransactionsModel"
+    put:
+      tags:
+        - Transactions
+      operationId: put-update-bank-accounts
+      summary: Update Transactions details
+      description: Updates details of a Transactions.
+      parameters:
+        - in: path
+          name: bankId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the bank accounts to update.
+      responses:
+        "200":
+          description: Successful user update
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        $ref: "#/components/schemas/TransactionsModel"
+    delete:
+      tags:
+        - Transactions
+      operationId: delete-remove-transactions
+      summary: Delete Transactions
+      description: Deletes a specific Transactions.
+      parameters:
+        - in: path
+          name: bankId
+          schema:
+            type: integer
+          required: true
+          description: The ID of the transactions to delete.
+      responses:
+        "200":
+          description: Successful transactions deletion
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/BasicResponse"
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        example: null
+components:
+  schemas:
+    BasicResponse:
+      title: BasicResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "OK!"
+    UserModel:
+      title: User
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "muhammad afif"
+        email:
+          type: string
+          example: "mafif@mail.com"
+        password:
+          type: string
+          example: "afif123"
+    BankAccountsModel:
+      title: Bank Accounts
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 7
+        user_id:
+          type: integer
+          example: 5
+        bank_name:
+          type: string
+          example: "BRI"
+        bank_account_number:
+          type: string
+          example: "48494393"
+        balance:
+          type: number
+          example: 4444444
+    TransactionsModel:
+      title: User
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 39
+        source_account_id:
+          type: integer
+          example: 6
+        destination_account_id:
+          type: integer
+          example: 5
+        amount:
+          type: number
+          example: 1000000
+    Pagination:
+      title: Pagination
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            next:
+              type: string
+              example: "https://domain.com/users?page=3&limit=10"
+            prev:
+              type: string
+              example: "https://domain.com/users?page=1&limit=10"
+        total_items:
+          type: integer
+          example: 100
+  requestBodies:
+    CreateUser:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "muhamamd afif"
+              email:
+                type: string
+                example: "mafif@mail.com"
+              password:
+                type: string
+                example: "afif123"
+    CreateBankaccounts:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 7
+              user_id:
+                type: integer
+                example: 5
+              bank_name:
+                type: string
+                example: "BRI"
+              bank_account_number:
+                type: string
+                example: "48494393"
+              balance:
+                type: number
+                example: 44444445
+    CreateTranscations:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 39
+              source_account_id:
+                type: integer
+                example: 6
+              destination_account_id:
+                type: string
+                example: 5
+              amount:
+                type: number
+                example: 1000000

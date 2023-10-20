@@ -1,0 +1,95 @@
+### Membuat Users
+
+///USERS
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+    "name":"muhammad afif",
+    "email":"afif@mail.com",
+    "password": "afif"
+}
+
+
+### Index Users
+GET http://localhost:3000/api/v1/users
+
+### Detail Users
+GET http://localhost:3000/api/v1/users/4
+
+### Hapus Users
+DELETE http://localhost:3000/api/v1/users/15
+
+
+### Membuat akun bank
+POST http://localhost:3000/api/v1/bank_accounts
+Content-Type: application/json
+
+{
+    "user_id":1,
+    "bank_name":"BCA",
+    "bank_account_number": "48494393",
+    "balance": 1000000.00
+}
+
+### Melihat semua bank
+GET http://localhost:3000/api/v1/bank_accounts
+
+### Detail bank
+GET http://localhost:3000/api/v1/bank_accounts/5
+
+### Update Bank
+PUT http://localhost:3000/api/v1/bank_accounts/5
+Content-Type: application/json
+
+{
+    "user_id":5,
+    "bank_name":"BCA",
+    "bank_account_number": "1872771938829",
+    "balance": 5500000.00
+}
+
+### Hapus Bank
+DELETE http://localhost:3000/api/v1/bank_accounts/4
+
+### Transaction
+POST http://localhost:3000/api/v1/transactions
+Content-Type: application/json
+
+{
+    "source_account_id":6,
+    "destination_account_id":5,
+    "amount": 1000000.00
+}
+
+### Menampilkan seluruh transaksi
+GET http://localhost:3000/api/v1/transactions
+
+### Detail Transaksi
+GET http://localhost:3000/api/v1/transactions/39
+
+### Register
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name":"jojon",
+    "email":"jojon@mail.com",
+    "password":"jojon",
+    "password_confirmation":"jojon"
+}
+
+
+### Login
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email":"jojon@mail.com",
+    "password":"jojon"
+}
+
+### Whoami
+
+GET  http://localhost:3000/api/v1/auth/whoami
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjk3NzI3MzI1fQ.164P15S1gr6XW6uLXx5kG-IyV4HD0u8W03F9xPmr14s
